@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="components.views.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayList id="sortChoices">
+			<fx:String>Sorted by Country</fx:String>
+			<fx:String>Sorted by Alphabet</fx:String>
+		</s:ArrayList>
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%">
+		<s:DropDownList width="150" dataProvider="{sortChoices}">
+		</s:DropDownList>
+		<!--
+		<mx:ViewStack id="classicalMusicViewStack" width="200" height="200">
+		<s:NavigatorContent width="100%" height="100%" label="Country"> -->	
+		
+		<s:HGroup width="100%" height="100%">
+			<views:ClassicalMusicCountryView width="100%">
+			</views:ClassicalMusicCountryView>
+			<s:VSlider height="100%" width="10">
+				
+			</s:VSlider>
+		</s:HGroup>
+		
+		<!--
+		</s:NavigatorContent>
+		<s:NavigatorContent width="100%" height="100%" label="Alphabet">
+		</s:NavigatorContent>
+		</mx:ViewStack>
+		-->
+	</s:VGroup>
+</s:Group>

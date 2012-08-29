@@ -19,16 +19,18 @@
 			</s:DropDownList>
 			-->
 			
-			<mx:ViewStack id="musicViewStack" width="200" height="200">
+			<mx:ViewStack id="musicViewStack" width="100%" height="100%">
 				<s:NavigatorContent width="100%" height="100%" label="Classical">
+					<views:ContentClassicalMusicView width="100%" height="100%">
+					</views:ContentClassicalMusicView>
 				</s:NavigatorContent>
 				<s:NavigatorContent width="100%" height="100%" label="Pop">
 				</s:NavigatorContent>
 				<s:NavigatorContent width="100%" height="100%" label="R&amp;B">
 				</s:NavigatorContent>
 			</mx:ViewStack>
-		</s:VGroup>
-		
+			
+		</s:VGroup>	
 		
 	</s:BorderContainer>
 </s:Group>

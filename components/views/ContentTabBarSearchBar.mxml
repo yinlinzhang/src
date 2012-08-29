@@ -22,7 +22,7 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
-	<s:TabBar id="tarBar" left="0">
+	<s:TabBar id="tarBar" left="0" fontWeight="bold">
 	</s:TabBar>
 	<s:Spacer>	
 	</s:Spacer>
