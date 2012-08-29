@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			protected function searchBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				Alert.show("searching...");
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:TabBar id="tarBar" left="0">
+	</s:TabBar>
+	<s:Spacer>	
+	</s:Spacer>
+	<s:HGroup right="0" top="0" height="21" gap="0">
+		<s:TextInput id="searchText" prompt="Search">
+		</s:TextInput>
+		<s:Button id="searchBtn" click="searchBtn_clickHandler(event)"
+				  skinClass="components.skins.SearchBtnSkin">
+		</s:Button>
+	</s:HGroup>
+	
+		
+	
+</s:Group>

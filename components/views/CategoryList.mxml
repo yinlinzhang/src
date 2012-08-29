@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009"
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  horizontalAlign="center" paddingBottom="10" paddingLeft="10" paddingRight="10"
+		  paddingTop="10">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:LinkBar id="linkBar" width="100%" alpha="0.5" backgroundAlpha="0.8" backgroundColor="white"
+				direction="vertical" fontWeight="bold" horizontalAlign="center"
+				verticalAlign="middle">
+	</mx:LinkBar>
+</s:VGroup>

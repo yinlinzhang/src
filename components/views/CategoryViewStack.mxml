@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 xmlns:views="components.views.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">
+		<mx:ViewStack id="contentViewStack" width="100%" height="100%">
+			<s:NavigatorContent width="100%" height="100%" label="Music">
+				<views:ContentMusicView id="contentMusicView" width="100%" height="100%">
+				</views:ContentMusicView>
+			</s:NavigatorContent>
+			<s:NavigatorContent width="100%" height="100%" label="Photo">
+			</s:NavigatorContent>
+			<s:NavigatorContent width="100%" height="100%" label="Video">
+			</s:NavigatorContent>
+			<s:NavigatorContent width="100%" height="100%" label="Documentation">
+			</s:NavigatorContent>
+		</mx:ViewStack>
+	</s:BorderContainer>
+</s:Group>
