@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import components.events.LoginEvent;
+			
+			private var loginPopup:SigninPopup;
+			
+			protected function loginBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var ev:LoginEvent = new LoginEvent(LoginEvent.LOGIN); // Popup login
+				dispatchEvent(ev);
+				loginBtn.selected = false;
+			}
+			
+			protected function signinBtn_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var ev:LoginEvent = new LoginEvent(LoginEvent.SIGNIN); // Popup signin
+				dispatchEvent(ev);
+				signinBtn.selected = false;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout gap="0" />
+	</s:layout>
+	<s:ToggleButton id="loginBtn" width="55" label="Log in" click="loginBtn_clickHandler(event)"
+					selected="false"/>
+	<s:ToggleButton id="signinBtn" width="60" label="Sign in" click="signinBtn_clickHandler(event)"
+					selected="false"/>
+</s:Group>

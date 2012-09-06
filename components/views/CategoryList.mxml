@@ -7,7 +7,7 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<mx:LinkBar id="linkBar" width="100%" alpha="0.5" backgroundAlpha="0.8" backgroundColor="white"
+	<mx:LinkBar id="contentLinkBar" width="100%" alpha="0.5" backgroundAlpha="0.8" backgroundColor="white"
 				direction="vertical" fontWeight="bold" horizontalAlign="center">
 	</mx:LinkBar>
 </s:VGroup>

@@ -8,14 +8,41 @@
 	<fx:Style source="ClassicalFireworks.css"/>
 	<fx:Script>
 		<![CDATA[
+			import components.events.LoginEvent;
+			import components.views.SigninPopup;
+			
+			import mx.controls.Alert;
 			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			private var signinPopup:SigninPopup;
 			
 			protected function creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				categoryList.linkBar.dataProvider = categoryViewStack.contentViewStack;
+				categoryList.contentLinkBar.dataProvider = categoryViewStack.contentViewStack;
 				categoryViewStack.contentMusicView.contentBar.tarBar.dataProvider =
 					categoryViewStack.contentMusicView.musicViewStack;
+				
+				this.addEventListener(LoginEvent.LOGIN, loginHandler);
+				this.addEventListener(LoginEvent.SIGNIN, signinHandler);
+			}
+			
+			private function loginHandler(event:LoginEvent):void {
+				signinPopup = new SigninPopup();
+				PopUpManager.addPopUp(signinPopup, this, true);
+				PopUpManager.centerPopUp(signinPopup);
+			}
+			
+			private function signinHandler(event:LoginEvent):void {
+				Alert.show("SIGNIN");//TODO
+				/*
+				loginPopup = new SigninPopup();
+				//popup.addEventListener(, loginHandler);
+				PopUpManager.addPopUp(loginPopup, this, true);
+				//				/PopUpManager.centerPopUp(loginPopup);
+				PopUpManager.bringToFront(loginPopup);
+				//PopUpManager.*/
 			}
 			
 		]]>
@@ -28,6 +55,8 @@
 			<s:VGroup x="0" y="0" width="100%" height="100%">
 				<s:HGroup width="100%" height="20%">
 					<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">
+						<views:SigninLoginView right="10" top="10" width="115" height="20">
+						</views:SigninLoginView>
 					</s:BorderContainer>
 				</s:HGroup>
 				<s:HGroup width="100%" height="80%">
