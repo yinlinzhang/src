@@ -6,31 +6,28 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
-	<!--<s:Scroller width="100%" height="100%">-->
-	<s:VGroup width="100%" height="100%">
-		<views:CountryViewPanel source="@Embed('assets/pics/GER.png')" title="Germany"
-								skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>
-		<views:CountryViewPanel source="@Embed('assets/pics/AUT.png')" title="Austria"
-								skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>
-		<views:CountryViewPanel source="@Embed('assets/pics/ITA.png')" title="Italy"
-								skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>
-		<!--
-		<views:CountryViewPanel source="@Embed('assets/pics/POL.png')" title="Poland"
-								skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>
-		
-		<views:CountryViewPanel source="@Embed('assets/pics/RUS.png')" title="Russia"
-		skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>
-		<views:CountryViewPanel source="@Embed('assets/pics/FIN.png')" title="Finland"
-		skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
-		</views:CountryViewPanel>-->
-	</s:VGroup>
-	
-	<!--</s:Scroller>-->
-	
+	<s:Scroller width="100%" height="100%">
+		<s:VGroup width="100%" height="100%">
+			<views:CountryViewPanel source="@Embed('assets/pics/GER.png')" title="Germany"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+			<views:CountryViewPanel source="@Embed('assets/pics/AUT.png')" title="Austria"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+			<views:CountryViewPanel source="@Embed('assets/pics/ITA.png')" title="Italy"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+			<views:CountryViewPanel source="@Embed('assets/pics/POL.png')" title="Poland"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+			
+			<views:CountryViewPanel source="@Embed('assets/pics/RUS.png')" title="Russia"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+			<views:CountryViewPanel source="@Embed('assets/pics/FIN.png')" title="Finland"
+									skinClass="components.skins.CountryViewPanelSkin" width="100%" backgroundAlpha="0.5">
+			</views:CountryViewPanel>
+		</s:VGroup>
+	</s:Scroller>
 	
 </s:VGroup>

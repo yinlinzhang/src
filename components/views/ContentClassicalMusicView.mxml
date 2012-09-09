@@ -10,19 +10,18 @@
 		</s:ArrayList>
 	</fx:Declarations>
 	<s:VGroup width="100%" height="100%">
-		<s:DropDownList width="150" dataProvider="{sortChoices}" selectedIndex="0">
-		</s:DropDownList>
+		<!--<s:DropDownList width="150" dataProvider="{sortChoices}" selectedIndex="0"/>-->
 		<!--
 		<mx:ViewStack id="classicalMusicViewStack" width="200" height="200">
 		<s:NavigatorContent width="100%" height="100%" label="Country"> -->	
 		
-		<s:HGroup width="100%" height="100%">
-			<views:ClassicalMusicCountryView width="100%">
+		<s:Group width="100%" height="100%">
+			<views:ClassicalMusicCountryView width="100%" height="100%">
 			</views:ClassicalMusicCountryView>
-			<s:VSlider height="100%" width="10">
+			<!--<s:VSlider height="100%" width="10">-->
 				
-			</s:VSlider>
-		</s:HGroup>
+			<!--</s:VSlider>-->
+		</s:Group>
 		
 		<!--
 		</s:NavigatorContent>
