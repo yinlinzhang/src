@@ -2,8 +2,8 @@
 <s:Image xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 xmlns:mx="library://ns.adobe.com/flex/mx"
-		 width="120" height="120" click="image1_clickHandler(event)" scaleMode="zoom" smooth="true"
-		 smoothingQuality="high">
+		 width="120" height="120" buttonMode="true" click="image_clickHandler(event)"
+		 scaleMode="zoom" smooth="true" smoothingQuality="high" useHandCursor="true">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<s:HTTPService id="queryMusicList">
@@ -13,11 +13,13 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
+			import components.events.StateChangeEvent;
 			
-			protected function image1_clickHandler(event:MouseEvent):void
+			protected function image_clickHandler(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				Alert.show("adfa");	
+				var ev:StateChangeEvent = new StateChangeEvent(StateChangeEvent.ChangeToMusicState); // Popup login
+				dispatchEvent(ev);
 			}
 			
 		]]>

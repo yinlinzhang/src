@@ -4,46 +4,33 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="components.views.*">
 	<fx:Script>
 		<![CDATA[
-			import components.skins.CountryViewPanelSkin;
-			
+			import mx.collections.Grouping;
+			import mx.collections.GroupingCollection;
+			import mx.collections.GroupingField;
 			import mx.collections.XMLListCollection;
-			import mx.controls.Image;
 			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
+			import mx.collections.IViewCursor;
+			
+			import spark.events.IndexChangeEvent;
 			
 			[Bindable]
 			private var musicians:XMLListCollection;
+			
+			[Bindable]
+			private var currentCountry:String;
 			
 			protected function countryViewGroup_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				queryClassicalMusicians.send();
-				
 			}
 			
 			protected function queryClassicalMusicians_resultHandler(event:ResultEvent):void
 			{
 				// TODO Auto-generated method stub
 				musicians = new XMLListCollection(event.result.musician);
-				
-				for each (var m:XML in musicians) {
-					var musician:Object = Object(m);
-					trace(musician.name, musician.nation);
-					
-					var panel:CountryViewPanel = new CountryViewPanel();
-					//countryViewGroup.addElement()
-					panel.source = Object("assets/pics/" + musician.nation +".png");
-					panel.title = musician.name;
-					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
-					panel.width = this.width;
-					panel.setStyle("backgroundAlpha", "0.5");
-					//				panel.backgroundAlpha="0.5";
-					countryViewGroup.addElement(panel);
-					var image:MusicianImage = new MusicianImage();
-					image.source = Object("assets/pics/" + musician.name +".jpg");
-					panel.addElement(image);
-				}
 			}
 			
 			protected function queryClassicalMusicians_faultHandler(event:FaultEvent):void
@@ -52,18 +39,87 @@
 				
 			}
 			
+			protected function sortMusician_changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				if (sortMusician.selectedIndex == 0) {
+					sortedMusicianByCountry();
+				} else if (sortMusician.selectedIndex == 1) {
+					sortedMusicianByAlphabet();
+				}
+			}
+			
+			private function sortedMusicianByCountry():void {
+				
+				var countryGroup:GroupingCollection = new GroupingCollection();
+				countryGroup.source = musicians;
+				
+				var groupingInst:Grouping = new Grouping();
+				groupingInst.fields = [new GroupingField("nation"), new GroupingField("name")];
+				countryGroup.grouping = groupingInst;
+				countryGroup.refresh();
+						
+				// TODO:
+//				var cursor:IViewCursor = countryGroup.();
+//				var total:Number = 0;
+//				while (!cursor.afterLast)
+//				{
+//					total += Number(cursor.current.price);
+//					cursor.moveNext();
+//				}
+				
+				
+//				var countrySort:Sort = new Sort();
+//				countrySort.fields = new Array();
+//				countrySort.fields.push(new SortField('nation', true)); // TODO:
+//				
+//				var c:XMLListCollection = musicians;
+//				musicians.sort = countrySort;
+//				musicians.refresh();
+				
+//				for each (var m:XML in musicians) {
+//					var musician:Object = Object(m);
+//					var panel:CountryViewPanel = new CountryViewPanel();
+//					//countryViewGroup.addElement()
+//					panel.source = Object("assets/pics/" + musician.nation +".png");
+//					panel.title = musician.name;
+//					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
+//					panel.width = this.width;
+//					panel.setStyle("backgroundAlpha", "0.5");
+//					//				panel.backgroundAlpha="0.5";
+//					countryViewGroup.addElement(panel);
+//					var image:MusicianImage = new MusicianImage();
+//					image.source = Object("assets/pics/" + musician.name +".jpg");
+//					panel.addElement(image);
+//				}
+			}
+			
+			private function filterCountry(item:Object):Boolean {
+				return true;
+			}
+			
+			private function sortedMusicianByAlphabet():void {
+				
+			}
 		]]>
 	</fx:Script>
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 		<s:HTTPService id="queryClassicalMusicians"
 					   url="http://127.0.0.1/ClassicalFireworks/assets/configs/ClassicalMusicians.xml"
 					   resultFormat="e4x" result="queryClassicalMusicians_resultHandler(event)"
 					   fault="queryClassicalMusicians_faultHandler(event)">
-			
 		</s:HTTPService>
+		
+		<s:ArrayList id="sortChoices">
+			<fx:String>Sort By Country</fx:String>
+			<fx:String>Sort By Alphabet</fx:String>
+		</s:ArrayList>
 	</fx:Declarations>
 	
+	<s:DropDownList id="sortMusician" width="150"
+					dataProvider="{sortChoices}" selectedIndex="0" change="sortMusician_changeHandler(event)"/>
 	<s:Scroller width="100%" height="100%">
 		<s:VGroup id="countryViewGroup" width="100%" height="100%"
 				  creationComplete="countryViewGroup_creationCompleteHandler(event)">

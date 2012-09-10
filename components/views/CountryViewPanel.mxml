@@ -12,7 +12,7 @@
 			
 			[SkinPart(required="false")]
 			[Bindable]
-			public var source:Object;			
+			public var source:Object;
 		]]>
 	</fx:Script>
 </s:Panel>

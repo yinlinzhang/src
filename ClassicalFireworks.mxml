@@ -6,9 +6,11 @@
 			   minWidth="955" minHeight="600"
 			   creationComplete="creationCompleteHandler(event)">
 	<fx:Style source="ClassicalFireworks.css"/>
+	
 	<fx:Script>
 		<![CDATA[
 			import components.events.LoginEvent;
+			import components.events.StateChangeEvent;
 			import components.views.SigninPopup;
 			
 			import mx.controls.Alert;
@@ -17,8 +19,7 @@
 			
 			private var signinPopup:SigninPopup;
 			
-			protected function creationCompleteHandler(event:FlexEvent):void
-			{
+			protected function creationCompleteHandler(event:FlexEvent):void {
 				// TODO Auto-generated method stub
 				categoryList.contentLinkBar.dataProvider = categoryViewStack.contentViewStack;
 				categoryViewStack.contentMusicView.contentBar.tarBar.dataProvider =
@@ -26,6 +27,16 @@
 				
 				this.addEventListener(LoginEvent.LOGIN, loginHandler);
 				this.addEventListener(LoginEvent.SIGNIN, signinHandler);
+				this.addEventListener(StateChangeEvent.ChangeToMusicState, changeToMusicState);
+				this.addEventListener(StateChangeEvent.ChangeToMainState, changeToMainState);
+			}
+			
+			private function changeToMusicState(event:StateChangeEvent):void {
+				this.currentState = "MusicLibraryState";
+			}
+			
+			private function changeToMainState(event:StateChangeEvent):void {
+				this.currentState = "MainState";
 			}
 			
 			private function loginHandler(event:LoginEvent):void {
@@ -47,10 +58,27 @@
 			
 		]]>
 	</fx:Script>
+	
+	<s:states>
+		<s:State name="MainState"/>
+		<s:State name="MusicLibraryState"/>
+	</s:states>
+	<s:transitions>
+		<s:Transition fromState="MainState" toState="MusicLibraryState">
+			<!--<s:Fade target="{myImage}" duration="3000"/>-->
+			<s:Move xFrom="{this.width}" yFrom="0" xTo="0" yTo="0" target="{musicLibraryStateGroup}" duration="1000"/>
+		</s:Transition>
+		<s:Transition fromState="MusicLibraryState" toState="MainState">
+			<!--<s:Fade target="{myImage}" duration="3000"/>-->
+			<s:Move xFrom="0" yFrom="0" xTo="{this.width}" yTo="0" target="{musicLibraryStateGroup}" duration="1000"/>
+		</s:Transition>
+	</s:transitions>
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:Group x="0" y="0" width="100%" height="100%">
+
+	<s:Group id="mainStateGroup" x="0" y="0" width="100%" height="100%">
 		<s:BorderContainer width="100%" height="100%" backgroundImage="@Embed('assets/pics/windows-7-wallpaper.jpg')">
 			<s:VGroup x="0" y="0" width="100%" height="100%">
 				<s:HGroup width="100%" height="20%">
@@ -71,6 +99,30 @@
 						<views:CategoryViewStack id="categoryViewStack" width="100%" height="100%">
 						</views:CategoryViewStack>	
 					</s:HGroup>
+				</s:HGroup>
+			</s:VGroup>
+		</s:BorderContainer>
+	</s:Group>
+
+	<s:Group id="musicLibraryStateGroup" x.MusicLibraryState="0" y.MusicLibraryState="0"
+			 x.MainState="{this.width}" y.MainState="0"
+			 width="{this.width}" height="{this.height}">
+		<s:BorderContainer width="100%" height="100%" backgroundAlpha="1.0">
+			<s:VGroup width="100%" height="100%">
+				<s:Group width="100%" height="10%">
+					<s:Button id="back" width="{back.height}" height="100%" label="Button"
+							  buttonMode="true" click="this.currentState = 'MainState'"
+							  skinClass="components.skins.BackBtnRightArrowSkin"
+							  useHandCursor="true"
+							  verticalCenter.MainState="0"/>
+				</s:Group>
+				<s:HGroup width="100%" height="90%">					
+					<views:MusicianIntro width="20%" height="100%">
+					</views:MusicianIntro>
+					<s:VGroup width="80%" height="100%">
+						<s:BorderContainer width="100%" height="100%">
+						</s:BorderContainer>
+					</s:VGroup>
 				</s:HGroup>
 			</s:VGroup>
 		</s:BorderContainer>

@@ -29,8 +29,8 @@
 	<s:HGroup right="0" top="0" height="21" gap="0">
 		<s:TextInput id="searchText" prompt="Search">
 		</s:TextInput>
-		<s:Button id="searchBtn" click="searchBtn_clickHandler(event)"
-				  skinClass="components.skins.SearchBtnSkin">
+		<s:Button id="searchBtn" buttonMode="true" click="searchBtn_clickHandler(event)"
+				  skinClass="components.skins.SearchBtnSkin" useHandCursor="true">
 		</s:Button>
 	</s:HGroup>
 	
