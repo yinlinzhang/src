@@ -15,4 +15,6 @@
 			public var source:Object;
 		]]>
 	</fx:Script>
+	<s:HGroup id="showGroup" left="0" right="0" top="0" bottom="0">
+	</s:HGroup>
 </s:Panel>

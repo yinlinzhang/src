@@ -4,33 +4,70 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="components.views.*">
 	<fx:Script>
 		<![CDATA[
-			import mx.collections.Grouping;
-			import mx.collections.GroupingCollection;
-			import mx.collections.GroupingField;
+			import components.skins.CountryViewPanelSkin;
+			
+			import mx.collections.IViewCursor;
+			import mx.collections.Sort;
+			import mx.collections.SortField;
 			import mx.collections.XMLListCollection;
+			import mx.controls.Alert;
 			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
-			import mx.collections.IViewCursor;
 			
 			import spark.events.IndexChangeEvent;
 			
 			[Bindable]
-			private var musicians:XMLListCollection;
+			private var musiciansXML:XML;
 			
-			[Bindable]
-			private var currentCountry:String;
 			
 			protected function countryViewGroup_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				queryClassicalMusicians.send();
+				
+				
 			}
 			
 			protected function queryClassicalMusicians_resultHandler(event:ResultEvent):void
 			{
 				// TODO Auto-generated method stub
-				musicians = new XMLListCollection(event.result.musician);
+				musiciansXML = event.result as XML;
+				
+				var nations:XMLListCollection = new XMLListCollection(musiciansXML..nation.@name);
+				nations.sort = new Sort();
+				nations.refresh();
+				var nationsCursor:IViewCursor = nations.createCursor();
+				
+				var alphabetSort:Sort = new Sort();
+				alphabetSort.fields = new Array(new SortField("name"));
+				
+				while(!nationsCursor.afterLast) {
+					var musicians:XMLListCollection = new XMLListCollection(
+						musiciansXML..nation.(@name == nationsCursor.current.toString()).musician);
+					musicians.sort = alphabetSort;
+					musicians.refresh();
+					var musiciansCursor:IViewCursor = musicians.createCursor();
+					
+					/* create nation panel */
+					var panel:CountryViewPanel = new CountryViewPanel();
+					panel.source = Object("assets/pics/" + nationsCursor.current.toString() +".png");
+					panel.title = nationsCursor.current.toString();
+					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
+					panel.width = this.width;
+					panel.setStyle("backgroundAlpha", "0.5");
+					countryViewGroup.addElement(panel);
+					
+					while(!musiciansCursor.afterLast) {
+						/* create musician image */
+						var image:MusicianImage = new MusicianImage();
+						image.source = Object("assets/pics/" + musiciansCursor.current.name +".jpg");
+						panel.showGroup.addElement(image);
+						musiciansCursor.moveNext();
+					}
+					
+					nationsCursor.moveNext();
+				}
 			}
 			
 			protected function queryClassicalMusicians_faultHandler(event:FaultEvent):void
@@ -51,47 +88,56 @@
 			
 			private function sortedMusicianByCountry():void {
 				
-				var countryGroup:GroupingCollection = new GroupingCollection();
-				countryGroup.source = musicians;
-				
-				var groupingInst:Grouping = new Grouping();
-				groupingInst.fields = [new GroupingField("nation"), new GroupingField("name")];
-				countryGroup.grouping = groupingInst;
-				countryGroup.refresh();
 						
+//					var musicians:XMLListCollection = new XMLListCollection(
+//						musiciansXML..(nation == cursor.current.toString()));
+//					musicians.sort = alphabetSort;
+//					musicians.refresh();
+					/* populate panel */
+					
+				
+
+				//				var countryGroup:GroupingCollection = new GroupingCollection();
+				//				countryGroup.source = musicians;
+				//				
+				//				var groupingInst:Grouping = new Grouping();
+				//				groupingInst.fields = [new GroupingField("nation"), new GroupingField("name")];
+				//				countryGroup.grouping = groupingInst;
+				//				countryGroup.refresh();
+				
 				// TODO:
-//				var cursor:IViewCursor = countryGroup.();
-//				var total:Number = 0;
-//				while (!cursor.afterLast)
-//				{
-//					total += Number(cursor.current.price);
-//					cursor.moveNext();
-//				}
+				//				var cursor:IViewCursor = countryGroup.();
+				//				var total:Number = 0;
+				//				while (!cursor.afterLast)
+				//				{
+				//					total += Number(cursor.current.price);
+				//					cursor.moveNext();
+				//				}
 				
 				
-//				var countrySort:Sort = new Sort();
-//				countrySort.fields = new Array();
-//				countrySort.fields.push(new SortField('nation', true)); // TODO:
-//				
-//				var c:XMLListCollection = musicians;
-//				musicians.sort = countrySort;
-//				musicians.refresh();
+				//				var countrySort:Sort = new Sort();
+				//				countrySort.fields = new Array();
+				//				countrySort.fields.push(new SortField('nation', true)); // TODO:
+				//				
+				//				var c:XMLListCollection = musicians;
+				//				musicians.sort = countrySort;
+				//				musicians.refresh();
 				
-//				for each (var m:XML in musicians) {
-//					var musician:Object = Object(m);
-//					var panel:CountryViewPanel = new CountryViewPanel();
-//					//countryViewGroup.addElement()
-//					panel.source = Object("assets/pics/" + musician.nation +".png");
-//					panel.title = musician.name;
-//					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
-//					panel.width = this.width;
-//					panel.setStyle("backgroundAlpha", "0.5");
-//					//				panel.backgroundAlpha="0.5";
-//					countryViewGroup.addElement(panel);
-//					var image:MusicianImage = new MusicianImage();
-//					image.source = Object("assets/pics/" + musician.name +".jpg");
-//					panel.addElement(image);
-//				}
+				//				for each (var m:XML in musicians) {
+				//					var musician:Object = Object(m);
+				//					var panel:CountryViewPanel = new CountryViewPanel();
+				//					//countryViewGroup.addElement()
+				//					panel.source = Object("assets/pics/" + musician.nation +".png");
+				//					panel.title = musician.name;
+				//					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
+				//					panel.width = this.width;
+				//					panel.setStyle("backgroundAlpha", "0.5");
+				//					//				panel.backgroundAlpha="0.5";
+				//					countryViewGroup.addElement(panel);
+				//					var image:MusicianImage = new MusicianImage();
+				//					image.source = Object("assets/pics/" + musician.name +".jpg");
+				//					panel.addElement(image);
+				//				}
 			}
 			
 			private function filterCountry(item:Object):Boolean {
