@@ -9,9 +9,9 @@
 		<s:RadioButtonGroup id="genderSelection" selectedValue="MALE"/>
 		
 		<mx:HTTPService id="registerRequest"
-						url="http://9.123.233.218/SmartTaxi/register/" method="POST"
+						url="http://127.0.0.1/SmartTaxi/register/" method="POST"
 						result="registerRequest_resultHandler(event)"
-						fault="registerRequest_faultHandler(event)" concurrency="single"/>
+						fault="registerRequest_faultHandler(event)" concurrency="last"/>
 		
 		<mx:PhoneNumberValidator id="phoneNumValidator" source="{phoneNum}" property="text" minDigits="11"
 								 trigger="{signinConfirmBtn}" triggerEvent="click"/>
@@ -75,7 +75,6 @@
 				// TODO Auto-generated method stub
 				if(!checkInput())
 					return;
-				
 				submitRequest();
 			}
 			
@@ -104,8 +103,6 @@
 		<s:FormItem>
 			<s:Button id="signinConfirmBtn" x="100" top="0" label="Submit"
 					  click="signinConfirmBtn_clickHandler(event)"/>
-			
 		</s:FormItem>
-		
 	</s:Form>
 </s:TitleWindow>

@@ -34,7 +34,7 @@
         [HostComponent("spark.components.Button")]
         ]]>
     </fx:Metadata>
-   
+    
     <!-- states -->
     <s:states>
         <s:State name="up" />
@@ -42,10 +42,10 @@
         <s:State name="down" />
         <s:State name="disabled" />
     </s:states>
-	
-	<s:Image source="@Embed('assets/pics/exit.gif')"
-			 left="0" right="0" top="0" bottom="0"
-			 scaleMode="zoom" smooth="true" smoothingQuality="high" alpha.disabled="0.5">
-	</s:Image>
+
+    <s:Label id="labelDisplay" left="10" right="10" top="2" bottom="2" horizontalCenter="0"
+			 maxDisplayedLines="1" textAlign="center" verticalAlign="middle" verticalCenter="1"
+			 buttonMode.up="true" fontSize.up="12" useHandCursor.up="true">
+    </s:Label>
     
 </s:SparkButtonSkin>

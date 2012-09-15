@@ -10,7 +10,6 @@
 			import mx.collections.Sort;
 			import mx.collections.SortField;
 			import mx.collections.XMLListCollection;
-			import mx.controls.Alert;
 			import mx.events.FlexEvent;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
@@ -19,14 +18,11 @@
 			
 			[Bindable]
 			private var musiciansXML:XML;
-			
-			
+				
 			protected function countryViewGroup_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
 				queryClassicalMusicians.send();
-				
-				
 			}
 			
 			protected function queryClassicalMusicians_resultHandler(event:ResultEvent):void
@@ -35,12 +31,15 @@
 				musiciansXML = event.result as XML;
 				
 				var nations:XMLListCollection = new XMLListCollection(musiciansXML..nation.@name);
-				nations.sort = new Sort();
+				var s:Sort = new Sort();
+				s.reverse();
+				nations.sort = s;
 				nations.refresh();
 				var nationsCursor:IViewCursor = nations.createCursor();
 				
 				var alphabetSort:Sort = new Sort();
 				alphabetSort.fields = new Array(new SortField("name"));
+//				alphabetSort.reverse();
 				
 				while(!nationsCursor.afterLast) {
 					var musicians:XMLListCollection = new XMLListCollection(
@@ -88,60 +87,6 @@
 			
 			private function sortedMusicianByCountry():void {
 				
-						
-//					var musicians:XMLListCollection = new XMLListCollection(
-//						musiciansXML..(nation == cursor.current.toString()));
-//					musicians.sort = alphabetSort;
-//					musicians.refresh();
-					/* populate panel */
-					
-				
-
-				//				var countryGroup:GroupingCollection = new GroupingCollection();
-				//				countryGroup.source = musicians;
-				//				
-				//				var groupingInst:Grouping = new Grouping();
-				//				groupingInst.fields = [new GroupingField("nation"), new GroupingField("name")];
-				//				countryGroup.grouping = groupingInst;
-				//				countryGroup.refresh();
-				
-				// TODO:
-				//				var cursor:IViewCursor = countryGroup.();
-				//				var total:Number = 0;
-				//				while (!cursor.afterLast)
-				//				{
-				//					total += Number(cursor.current.price);
-				//					cursor.moveNext();
-				//				}
-				
-				
-				//				var countrySort:Sort = new Sort();
-				//				countrySort.fields = new Array();
-				//				countrySort.fields.push(new SortField('nation', true)); // TODO:
-				//				
-				//				var c:XMLListCollection = musicians;
-				//				musicians.sort = countrySort;
-				//				musicians.refresh();
-				
-				//				for each (var m:XML in musicians) {
-				//					var musician:Object = Object(m);
-				//					var panel:CountryViewPanel = new CountryViewPanel();
-				//					//countryViewGroup.addElement()
-				//					panel.source = Object("assets/pics/" + musician.nation +".png");
-				//					panel.title = musician.name;
-				//					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
-				//					panel.width = this.width;
-				//					panel.setStyle("backgroundAlpha", "0.5");
-				//					//				panel.backgroundAlpha="0.5";
-				//					countryViewGroup.addElement(panel);
-				//					var image:MusicianImage = new MusicianImage();
-				//					image.source = Object("assets/pics/" + musician.name +".jpg");
-				//					panel.addElement(image);
-				//				}
-			}
-			
-			private function filterCountry(item:Object):Boolean {
-				return true;
 			}
 			
 			private function sortedMusicianByAlphabet():void {

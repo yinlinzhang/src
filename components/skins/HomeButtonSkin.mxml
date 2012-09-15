@@ -34,7 +34,7 @@
         [HostComponent("spark.components.Button")]
         ]]>
     </fx:Metadata>
-   
+	
     <!-- states -->
     <s:states>
         <s:State name="up" />
@@ -43,9 +43,10 @@
         <s:State name="disabled" />
     </s:states>
 	
-	<s:Image source="@Embed('assets/pics/exit.gif')"
-			 left="0" right="0" top="0" bottom="0"
-			 scaleMode="zoom" smooth="true" smoothingQuality="high" alpha.disabled="0.5">
-	</s:Image>
+	<s:BitmapImage horizontalCenter="0" source="@Embed('assets/pics/phantom_fireworks.jpg')"
+				   verticalCenter="0"
+				   alpha.disabled="0.5">
+		
+	</s:BitmapImage>
     
 </s:SparkButtonSkin>

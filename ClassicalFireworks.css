@@ -5,7 +5,13 @@
 
 global
 {
-	font-family: Verdana;
-	font-size: 10;
+	font-family: SaccoVanzetti;
+	font-size: 11;
+}
+@font-face
+{
+	fontFamily: SaccoVanzetti;
+	src: url("D:\flex4-projects\ClassicalFireworks\src\assets\fonts\SaccoVanzetti.ttf");
+	embedAsCFF: true;
 }
 	

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:HTTPService id="requestMusicianPlayList"
+					   url="http://127.0.0.1/ClassicalFireworks/assets/configs/Mozart_playlist.xml"
+					   resultFormat="e4x" result="queryMusicianPlayList_resultHandler(event)"
+					   fault="queryMusicianPlayList_faultHandler(event)">
+		</s:HTTPService>
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.collections.Grouping;
+			import mx.collections.GroupingCollection2;
+			import mx.collections.GroupingField;
+			import mx.collections.IViewCursor;
+			import mx.collections.Sort;
+			import mx.collections.SortField;
+			import mx.collections.XMLListCollection;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			[Bindable]
+			private var playListXML:XML;
+
+			[Bindable]
+			private var arr:ArrayCollection;
+			
+			protected function queryMusicianPlayList_resultHandler(event:ResultEvent):void
+			{
+				// TODO Auto-generated method stub
+				playListXML = event.result as XML;
+				
+				// TODO:
+				
+				var cursor:IViewCursor = new XMLListCollection(playListXML.node).createCursor();
+				var data:Array = new Array();
+				
+				while(!cursor.afterLast) {
+					data.push({id:cursor.current.id,
+						inst:cursor.current.inst,
+						type:cursor.current.type});
+					cursor.moveNext();
+				}
+				
+				arr = new ArrayCollection(data);
+				playList.refresh();
+			}
+			
+			protected function queryMusicianPlayList_faultHandler(event:FaultEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				requestMusicianPlayList.send();
+			}
+		]]>
+	</fx:Script>
+	<s:Button x="0" y="0" label="Button" click="button1_clickHandler(event)"/>
+	<mx:AdvancedDataGrid id="musicianPlayList" left="0" right="0" top="30" bottom="0">
+	<!--<mx:AdvancedDataGrid id="musicianPlayList" left="0" right="0" top="30" bottom="0" dataProvider="{playList}">-->
+		<mx:dataProvider>
+			<mx:GroupingCollection2 id="playList" source="{arr}">
+				<mx:Grouping>
+					<mx:GroupingField name="type"/>
+				</mx:Grouping>
+			</mx:GroupingCollection2>
+		</mx:dataProvider>
+		<mx:columns>
+			<mx:AdvancedDataGridColumn dataField="id" headerText="Master Piece List" />
+			<mx:AdvancedDataGridColumn dataField="inst" headerText="Master Piece List"/>
+			<mx:AdvancedDataGridColumn dataField="type" headerText="Master Piece List"/>
+		</mx:columns>
+	</mx:AdvancedDataGrid>
+	
+</s:Group>

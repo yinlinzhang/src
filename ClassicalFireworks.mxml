@@ -77,20 +77,33 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
+	<s:controlBarLayout>
+		<s:BasicLayout/>
+	</s:controlBarLayout>
+	
+	<s:controlBarContent>
+		<!--<s:HGroup width="100%" height="20%">-->
+			<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">
+				<s:Button skinClass="components.skins.HomeButtonSkin">
+					
+				</s:Button>
+				<views:SigninLoginView right="10" top="10" width="115" height="20"
+									   right.MainState="15" top.MainState="10">
+				</views:SigninLoginView>
+			</s:BorderContainer>
+		<!--</s:HGroup>-->
+	</s:controlBarContent>
 
 	<!--backgroundImage="@Embed('assets/pics/windows-7-wallpaper.jpg')"-->
 	<s:Group id="mainStateGroup" x="0" y="0" width="100%" height="100%">
 		<s:BorderContainer width="100%" height="100%" >
-			<s:VGroup x="0" y="0" width="100%" height="100%">
-				<s:HGroup width="100%" height="20%">
-					<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">
-						<views:SigninLoginView right="10" top="10" width="115" height="20">
-						</views:SigninLoginView>
-					</s:BorderContainer>
-				</s:HGroup>
-				<s:HGroup width="100%" height="80%">
+			<!--<s:VGroup x="0" y="0" width="100%" height="100%">-->
+				<s:HGroup width="100%" height="100%">
 					<s:VGroup width="15%" height="100%">
-						<s:BorderContainer width="100%" height="100%" backgroundAlpha="0">
+						<s:BorderContainer width="100%" height="100%"
+										   backgroundImageFillMode="scale"
+										   backgroundImage="@Embed('assets/pics/rainbow.jpg')">
 							<views:CategoryList id="categoryList" width="100%" height="100%"
 												horizontalCenter="0" verticalCenter="0">
 							</views:CategoryList>
@@ -101,7 +114,7 @@
 						</views:CategoryViewStack>	
 					</s:HGroup>
 				</s:HGroup>
-			</s:VGroup>
+			<!--</s:VGroup>-->
 		</s:BorderContainer>
 	</s:Group>
 
@@ -122,6 +135,9 @@
 					</views:MusicianIntro>
 					<s:VGroup width="80%" height="100%">
 						<s:BorderContainer width="100%" height="100%">
+							<views:MusicianPlayListView width="100%" height="100%">
+								
+							</views:MusicianPlayListView>
 						</s:BorderContainer>
 					</s:VGroup>
 				</s:HGroup>

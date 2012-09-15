@@ -236,11 +236,11 @@ in accordance with the terms of the license agreement accompanying it.
                 <!-- layer 3: text -->
                 <!--- @copy spark.components.Panel#titleDisplay -->
                 <s:Label id="titleDisplay" right="3" top="1" bottom="0" minHeight="30"
-						 fontWeight="bold" maxDisplayedLines="1" textAlign="start"
-						 verticalAlign="middle"
+						 maxDisplayedLines="1" textAlign="start" verticalAlign="middle"
 						 left.disabled="9"
 						 left.disabledWithControlBar="9"
 						 left.normal="30" right.normal="0" top.normal="0" bottom.normal="0"
+						 fontFamily.normal="Verdana" fontSize.normal="10"
 						 text.normal="{hostComponent.title}"
 						 left.normalWithControlBar="9">
                 </s:Label>
