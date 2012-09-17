@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("core.MusicianInfoView")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="normal" />
+		<s:State name="disabled" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=musicType, type=spark.components.Label, required=true
+	name=life, type=spark.components.Label, required=true
+	name=birthplace, type=spark.components.Label, required=true
+	name=image, type=spark.primitives.BitmapImage, required=true
+	name=reprWorks, type=spark.components.List, required=true
+	name=musicAge, type=spark.components.Label, required=true
+	name=fullname, type=spark.components.Label, required=true
+	-->
+	
+	<s:Image source="assets/pics/frame.png"
+			 x.normal="0" y.normal="102" width.normal="289" height.normal="529"/>
+	
+	<s:BitmapImage id="image" left="20" top="10" width="50" height="50"
+				   source="assets/pics/tchaikovsky.jpg"
+				   left.normal="10" top.normal="10" width.normal="180" height.normal="190"/>
+	<s:Label id="fullname"
+			 x.normal="202" y.normal="84" text.normal="Tchaikovsky"/>
+	<s:Label id="life"
+			 x.normal="66" y.normal="300" text.normal="life"/>
+	<s:Label id="birthplace"
+			 x.normal="66" y.normal="343" text.normal="birthplace"/>
+	<s:Label id="musicAge"
+			 x.normal="69" y.normal="388" text.normal="musicAge"/>
+	<s:Label id="musicType"
+			 x.normal="66" y.normal="429" text.normal="musicType"/>
+	<s:Line id="divider">
+		<s:stroke>
+			<s:SolidColorStroke color="#545454" weight="1"/>
+		</s:stroke>
+	</s:Line>
+	<s:List id="reprWorks" includeIn="disabled">
+		
+	</s:List>
+</s:Skin>

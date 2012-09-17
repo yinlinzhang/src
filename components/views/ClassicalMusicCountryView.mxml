@@ -32,6 +32,7 @@
 				
 				var nations:XMLListCollection = new XMLListCollection(musiciansXML..nation.@name);
 				var s:Sort = new Sort();
+//				TODO
 				s.reverse();
 				nations.sort = s;
 				nations.refresh();
@@ -39,14 +40,15 @@
 				
 				var alphabetSort:Sort = new Sort();
 				alphabetSort.fields = new Array(new SortField("name"));
-//				alphabetSort.reverse();
+//				TODO: alphabetSort.reverse();
 				
 				while(!nationsCursor.afterLast) {
 					var musicians:XMLListCollection = new XMLListCollection(
 						musiciansXML..nation.(@name == nationsCursor.current.toString()).musician);
+					
+//					TODO: reverse();
 					musicians.sort = alphabetSort;
 					musicians.refresh();
-					var musiciansCursor:IViewCursor = musicians.createCursor();
 					
 					/* create nation panel */
 					var panel:CountryViewPanel = new CountryViewPanel();
@@ -55,16 +57,9 @@
 					panel.setStyle("skinClass", Class(components.skins.CountryViewPanelSkin));
 					panel.width = this.width;
 					panel.setStyle("backgroundAlpha", "0.5");
-					countryViewGroup.addElement(panel);
-					
-					while(!musiciansCursor.afterLast) {
-						/* create musician image */
-						var image:MusicianImage = new MusicianImage();
-						image.source = Object("assets/pics/" + musiciansCursor.current.name +".jpg");
-						panel.showGroup.addElement(image);
-						musiciansCursor.moveNext();
-					}
-					
+					countryViewGroup.addElement(panel);					
+					panel.showGroup.dataProvider = musicians;
+
 					nationsCursor.moveNext();
 				}
 			}

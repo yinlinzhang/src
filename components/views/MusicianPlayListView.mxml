@@ -12,6 +12,10 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
+			import flash.events.NetStatusEvent;
+			import flash.net.NetConnection;
+			import flash.net.NetStream;
+			
 			import mx.collections.ArrayCollection;
 			import mx.collections.Grouping;
 			import mx.collections.GroupingCollection2;
@@ -22,6 +26,75 @@
 			import mx.collections.XMLListCollection;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
+			
+			private var nc:NetConnection;
+			private var ns:NetStream;
+			private var rtmpNow:String = "rtmpe://127.0.0.1/musiceden";	//rtmpNow="rtmpe:/connect";
+			private var isPlaying:Boolean;
+			
+			private function monitorTime(e:Event):void {
+				if(isPlaying) {
+					timeField.text = Math.round(ns.time) + " seconds...";
+				}
+			}
+			
+			private function FMSConnect():void
+			{
+				nc=new NetConnection();
+				nc.addEventListener (NetStatusEvent.NET_STATUS, checkConnect);
+				nc.connect(rtmpNow);
+				addEventListener(Event.ENTER_FRAME, monitorTime);
+			}
+			
+			private function beginStream():void	{
+				ns = new NetStream(nc);
+				ns.addEventListener(NetStatusEvent.NET_STATUS, checkConnect);
+				ns.play("mp3:Michel Telo - If I Catch You (Ai Se Eu Te Pego)", 0, -1);
+				ns.pause();
+				ns.seek(0);
+//				ns.play2();
+				timeField.text = "ready";
+			}
+			
+			private function playStream(e:MouseEvent):void {
+				if(!isPlaying) {
+					ns.resume();
+					isPlaying = true;
+				}
+			}
+			
+			private function pauseStream(e:MouseEvent):void {
+				if(isPlaying) {
+					isPlaying = false;
+					ns.pause();
+					timeField.text = "paused";
+				}
+			}
+			
+			private function stopStream(e:MouseEvent):void {
+				isPlaying = false;
+				ns.close();
+				timeField.text = "stopped";
+			}
+			
+			private function checkConnect (event:NetStatusEvent):void
+			{
+//				connectText=new TextField();
+				retBtn.text = event.info.code;
+				switch(event.info.code) {
+					case "NetConnection.Connect.Success":
+						beginStream();
+						break;
+					case "NetConnection.Connect.Rejected":
+						break;
+					case "NetStream.Play.Start":
+						break;
+					case "NetStream.Play.StreamNotFound":
+						trace("Can't find the stream.");
+						break;
+				}
+				
+			}
 			
 			[Bindable]
 			private var playListXML:XML;
@@ -61,11 +134,35 @@
 				// TODO Auto-generated method stub
 				requestMusicianPlayList.send();
 			}
+			
+			protected function playMusic_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				FMSConnect();
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function button3_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			protected function button4_clickHandler(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
 		]]>
 	</fx:Script>
 	<s:Button x="0" y="0" label="Button" click="button1_clickHandler(event)"/>
 	<mx:AdvancedDataGrid id="musicianPlayList" left="0" right="0" top="30" bottom="0">
-	<!--<mx:AdvancedDataGrid id="musicianPlayList" left="0" right="0" top="30" bottom="0" dataProvider="{playList}">-->
 		<mx:dataProvider>
 			<mx:GroupingCollection2 id="playList" source="{arr}">
 				<mx:Grouping>
@@ -74,10 +171,15 @@
 			</mx:GroupingCollection2>
 		</mx:dataProvider>
 		<mx:columns>
-			<mx:AdvancedDataGridColumn dataField="id" headerText="Master Piece List" />
+			<mx:AdvancedDataGridColumn dataField="id" headerText="Master Piece List"/>
 			<mx:AdvancedDataGridColumn dataField="inst" headerText="Master Piece List"/>
 			<mx:AdvancedDataGridColumn dataField="type" headerText="Master Piece List"/>
 		</mx:columns>
 	</mx:AdvancedDataGrid>
-	
+	<s:Button x="78" y="0" id="playMusic" label="Go" click="playMusic_clickHandler(event)"/>
+	<s:Button x="165" y="1" label="Play" click="playStream(event)"/>
+	<s:Label id="retBtn" x="526" y="11" text="Ret Code"/>
+	<s:Label id="timeField" x="455" y="13" text="Play Status"/>
+	<s:Button x="243" y="1" label="Pause" click="pauseStream(event)"/>
+	<s:Button x="317" y="1" label="Stop" click="stopStream(event)"/>
 </s:Group>

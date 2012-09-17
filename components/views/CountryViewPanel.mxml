@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx">
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 borderVisible="false">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -15,6 +16,10 @@
 			public var source:Object;
 		]]>
 	</fx:Script>
-	<s:HGroup id="showGroup" left="0" right="0" top="0" bottom="0">
-	</s:HGroup>
+	<s:List id="showGroup" left="0" top="0" height="140" fontFamily="Verdana" fontSize="10"
+			itemRenderer="components.views.MusicianItemRender" borderVisible="false">
+		<s:layout>
+			<s:HorizontalLayout/>
+		</s:layout>
+	</s:List>
 </s:Panel>

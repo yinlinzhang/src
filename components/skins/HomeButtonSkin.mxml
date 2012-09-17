@@ -48,5 +48,13 @@
 				   alpha.disabled="0.5">
 		
 	</s:BitmapImage>
+	
+	<!--
+	<s:Rect id="fill" top="1" bottom="1" left="1" right="1">
+		<s:fill>
+			
+		</s:fill>
+	</s:Rect>
+	-->
     
 </s:SparkButtonSkin>
